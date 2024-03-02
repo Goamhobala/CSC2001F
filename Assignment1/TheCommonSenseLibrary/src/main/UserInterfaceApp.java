@@ -1,4 +1,4 @@
-public class Main{
+public class UserInterfaceApp{
     public static void main(String args[]){
         System.out.println("Hello world");
     }
