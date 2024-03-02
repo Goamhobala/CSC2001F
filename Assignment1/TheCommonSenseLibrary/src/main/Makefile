@@ -6,7 +6,7 @@ JFLAGS = -g
 JAVA = java
 # JVMFLAGS = -cp ./lib/javafx-sdk-17.0.10/lib/*
 
-MAIN = UserInterFaceApp.java
+MAIN = UserInterface.java
 
 
 # Remove default target location for compiled classes
@@ -15,7 +15,7 @@ MAIN = UserInterFaceApp.java
 .java.class: 
 	$(JAVAC) $(JFLAGS) $*.java
 
-CLASSES = $(MAIN).java
+CLASSES = UserInterface.java
 
 default: classes
 
@@ -23,7 +23,4 @@ classes: $(CLASSES:.java=.class)
 
 run: 
 	$(JAVA) $(MAIN)
-
-clean:
-	rm *.class
 
