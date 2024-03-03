@@ -20,10 +20,17 @@ CLASSES = UserInterface.java\
 		  KnowledgeBase.java\
 	   	  Entry.java	
 
-default: classes
+default: classes\
+		 moveClass
 
 classes: $(CLASSES:.java=.class)
 
+moveClass:
+	mv *.class ../../bin/
+
 run: 
 	$(JAVA) $(MAIN)
+
+clear: 
+	rm *.class
 
