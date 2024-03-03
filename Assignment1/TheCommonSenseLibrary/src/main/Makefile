@@ -9,13 +9,16 @@ JAVA = java
 MAIN = UserInterface.java
 
 
+
 # Remove default target location for compiled classes
 .SUFFIXES: .java .class
 
 .java.class: 
 	$(JAVAC) $(JFLAGS) $*.java
 
-CLASSES = UserInterface.java
+CLASSES = UserInterface.java\
+		  KnowledgeBase.java\
+	   	  Entry.java	
 
 default: classes
 

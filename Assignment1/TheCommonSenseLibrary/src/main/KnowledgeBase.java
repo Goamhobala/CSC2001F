@@ -1,12 +1,12 @@
-import java.io.FileReader;
+import java.io.Reader;
 public interface KnowledgeBase {
     /**
      * To add all the statements in a file being read by a Reader to the KnowledgeBase.
      * Note that statements with the same statement would be updated based on the confidence score,
      * with the one with lower confidence score discarded.
-     * @param FileReader inputFileReader: The name of the reader extracting the data from the file;
+     * @param Reader inputReader: The name of the reader extracting the data from the file;
      */
-    public void add(FileReader inputFileReader);
+    public void add(Reader inputReader);
 
     /**
      * To add a single statement to the KnowledgeBase
