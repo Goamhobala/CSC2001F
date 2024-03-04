@@ -16,7 +16,7 @@ public class Entry implements Comparable<Entry>{
         scanner.useDelimiter("\\d");
         // To remove the whitespaces separating the sentence and confidence score
         this.sentence = scanner.next().trim();
-        scanner.useDelimiter("");
+        scanner.useDelimiter(" ");
         this.score = scanner.nextDouble();
     };
     /**
@@ -54,7 +54,7 @@ public class Entry implements Comparable<Entry>{
 
     @Override
     public String toString(){
-        return String.format("%s    %s    %.2f", term, sentence, score);
+        return String.format("%s    %s    %.4f", term, sentence, score);
     }
     
     /**

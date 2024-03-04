@@ -3,7 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-public class KnowledgeBaseArray implements KnowledgeBase{
+public class KnowledgeBaseArray extends KnowledgeBase{
     int counter;
     Entry[] statements;
     /**
@@ -33,9 +33,8 @@ public class KnowledgeBaseArray implements KnowledgeBase{
     }
 
     @Override
-    public void addOne(String statement){
-        Entry newEntry = new Entry(statement);
-        Entry existingEntry = search(newEntry.getTerm());
+    public void addOne(Entry newEntry){
+        Entry existingEntry = searchEntry(newEntry.getTerm());
         if (existingEntry == null){
             this.statements[this.counter++] = newEntry;
             return;
@@ -52,8 +51,8 @@ public class KnowledgeBaseArray implements KnowledgeBase{
     @Override
     public void save(String outputFile){ 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))){
-            for (Entry statement: this.statements){
-                writer.write(statement.toString());
+            for (int i=0; i < this.counter; i++ ){
+                writer.write(this.statements[i].toString() + "\n");
             }
             writer.flush();
         } catch(IOException e){
@@ -69,7 +68,6 @@ public class KnowledgeBaseArray implements KnowledgeBase{
             return null;
         }
         return this.statements[index];
-        ;
     }
 
 /**
@@ -83,7 +81,8 @@ public class KnowledgeBaseArray implements KnowledgeBase{
  * found, otherwise it returns -1.
  */
     public int searchIndex(String term){
-        for (int i = 0; i <= this.counter; i++){
+        // this.counter = i + 1
+        for (int i = 0; i < this.counter; i++){
             if (this.statements[i].getTerm() == term){
                 return i;
             }

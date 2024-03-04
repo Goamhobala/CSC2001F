@@ -14,7 +14,7 @@ public abstract class KnowledgeBase {
      * with the one with lower confidence score discarded.
      * @param String statement: The statement to be written to the KnowledgeBase
      */
-    public abstract void addOne(String statement);
+    public abstract void addOne(Entry newEntry);
 
     /** 
      * To write the loaded knowledge base into a file
