@@ -61,17 +61,36 @@ public class KnowledgeBaseArray implements KnowledgeBase{
         }
     }
 
-    @Override
-    public Entry search(String term){
-        for (Entry statement: this.statements){
-            if (statement.getTerm() == term){
-                return statement;
-            }
-        }
-        return null;
 
+    @Override
+    public Entry searchEntry(String term){
+        int index = this.searchIndex(term);
+        if (index == -1){
+            return null;
+        }
+        return this.statements[index];
+        ;
     }
 
+/**
+ * This Java function searches for a specific term in an array of statements and returns the index
+ * where the term is found, or -1 if the term is not found.
+ * 
+ * @param term The `searchIndex` method you provided is used to search for a specific term within an
+ * array of statements. It iterates through the array and compares each term with the input term until
+ * a match is found. If a match is found, it returns the index of that term in the array. If
+ * @return The searchIndex method is returning the index of the term in the statements array if it is
+ * found, otherwise it returns -1.
+ */
+    public int searchIndex(String term){
+        for (int i = 0; i <= this.counter; i++){
+            if (this.statements[i].getTerm() == term){
+                return i;
+            }
+        }
+        return -1;
+
+    }
     public Entry search(int index){
         return this.statements[index];
     }
