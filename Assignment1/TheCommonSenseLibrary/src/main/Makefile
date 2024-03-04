@@ -17,16 +17,15 @@ MAIN = UserInterface.java
 	$(JAVAC) $(JFLAGS) $*.java
 
 CLASSES = UserInterface.java\
-		  KnowledgeBase.java\
+		  KnowledgeBase.java KnowledgeBaseArray.java\
 	   	  Entry.java	
 
-default: classes\
-		 moveClass
+default: classes
 
 classes: $(CLASSES:.java=.class)
 
-moveClass:
-	mv *.class ../../bin/
+# moveClass:
+# 	mv *.class ./bin
 
 run: 
 	$(JAVA) $(MAIN)

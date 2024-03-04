@@ -1,12 +1,12 @@
-import java.io.Reader;
 public interface KnowledgeBase {
+    
     /**
-     * To add all the statements in a file being read by a Reader to the KnowledgeBase.
+     * To add all the statements in a file to the KnowledgeBase.
      * Note that statements with the same statement would be updated based on the confidence score,
      * with the one with lower confidence score discarded.
-     * @param Reader inputReader: The name of the reader extracting the data from the file;
+     * @param String file: The name of the file to extract data from;
      */
-    public void add(Reader inputReader);
+    public void addFile(String file);
 
     /**
      * To add a single statement to the KnowledgeBase
@@ -14,7 +14,7 @@ public interface KnowledgeBase {
      * with the one with lower confidence score discarded.
      * @param String statement: The statement to be written to the KnowledgeBase
      */
-    public void add(String statement);
+    public void addOne(String statement);
 
     /** 
      * To write the loaded knowledge base into a file
