@@ -35,6 +35,7 @@ public class KnowledgeBaseArray extends KnowledgeBase{
     @Override
     public void addOne(Entry newEntry){
         Entry existingEntry = searchEntry(newEntry.getTerm());
+        System.out.println(existingEntry);
         if (existingEntry == null){
             this.statements[this.counter++] = newEntry;
             return;
@@ -83,7 +84,7 @@ public class KnowledgeBaseArray extends KnowledgeBase{
     public int searchIndex(String term){
         // this.counter = i + 1
         for (int i = 0; i < this.counter; i++){
-            if (this.statements[i].getTerm() == term){
+            if (this.statements[i].getTerm().equals(term)){
                 return i;
             }
         }
@@ -92,6 +93,13 @@ public class KnowledgeBaseArray extends KnowledgeBase{
     }
     public Entry search(int index){
         return this.statements[index];
+    }
+
+/**
+ * Returns the actual number of elements within the array
+ */
+    public int getLength(){
+        return this.counter;
     }
 
 }

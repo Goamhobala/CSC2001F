@@ -25,6 +25,10 @@ public class BinarySearchTree<T extends Comparable>{
         this(null);
     }
 
+    public BinarySearchTreeNode search(){
+        
+    }
+
 
 }
 
