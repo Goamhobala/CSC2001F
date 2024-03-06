@@ -40,7 +40,7 @@ public class KnowledgeBaseArray extends KnowledgeBase{
             return;
         }
 
-        if (newEntry.compareTo(existingEntry) > 0){
+        if (newEntry.getScore() - existingEntry.getScore() > 0){
             existingEntry.setSentence(newEntry.getSentence());
             existingEntry.setScore(newEntry.getScore());
         }

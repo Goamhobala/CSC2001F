@@ -61,15 +61,6 @@ public class Entry implements Comparable<Entry>{
      */
     @Override
     public int compareTo(Entry other){
-        double difference = this.score - other.score;
-        if (difference > 0){
-            return 1;
-        }
-        else if (difference < 0){
-            return -1;
-        }
-        else{
-            return 0;
-        }
-    } 
+       return this.getTerm().compareTo(other.getTerm());
+    }
 }
