@@ -1,20 +1,15 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 public abstract class KnowledgeBase {
     
-    /**
-     * To add all the statements in a file to the KnowledgeBase.
-     * Note that statements with the same statement would be updated based on the confidence score,
-     * with the one with lower confidence score discarded.
-     * @param String file: The name of the file to extract data from;
-     */
-    public abstract void addFile(String file);
-
     /**
      * To add a single statement to the KnowledgeBase
      * Note that statements with the same statement would be updated based on the confidence score,
      * with the one with lower confidence score discarded.
      * @param String statement: The statement to be written to the KnowledgeBase
      */
-    public abstract void addOne(Entry newEntry);
+    public abstract void insert(Entry newEntry);
 
     /** 
      * To write the loaded knowledge base into a file
@@ -55,4 +50,14 @@ public abstract class KnowledgeBase {
         return searchEntry(term).getScore();
     }
 
+    public void addFile(String file){
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+            String statement;
+            while ((statement = reader.readLine()) != null){
+                insert(new Entry(statement));
+            }
+        } catch (IOException e){
+            System.out.println("Error: File not found.\nHint: Have you made a typo when entering the file name?");
+        }
+    }
 }

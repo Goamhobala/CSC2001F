@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 public class KnowledgeBaseArray extends KnowledgeBase{
@@ -20,22 +18,20 @@ public class KnowledgeBaseArray extends KnowledgeBase{
         
     }
 
-    @Override
-    public void addFile(String file){
-        try(BufferedReader reader = new BufferedReader(new FileReader(file))){
-            String statement;
-            while ((statement = reader.readLine()) != null){
-                this.statements[this.counter++] = new Entry(statement);
-            }
-        } catch (IOException e){
-            System.out.println("Error: File not found.\nHint: Have you made a typo when entering the file name?");
-        }
-    }
+    // public void addFile(String file){
+    //     try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+    //         String statement;
+    //         while ((statement = reader.readLine()) != null){
+    //             insert(new Entry(statement));
+    //         }
+    //     } catch (IOException e){
+    //         System.out.println("Error: File not found.\nHint: Have you made a typo when entering the file name?");
+    //     }
+    // }
 
     @Override
-    public void addOne(Entry newEntry){
+    public void insert(Entry newEntry){
         Entry existingEntry = searchEntry(newEntry.getTerm());
-        System.out.println(existingEntry);
         if (existingEntry == null){
             this.statements[this.counter++] = newEntry;
             return;

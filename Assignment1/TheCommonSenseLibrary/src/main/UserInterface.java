@@ -4,7 +4,7 @@ public class UserInterface{
         arr.addFile("../data/GenericsKB.txt");
         System.out.println(arr.searchIndex("lipid membrane"));
         System.out.println(arr.search(39).getScore());
-        arr.addOne(new Entry("lipid membrane	Hi mom!	1.0"));
+        arr.insert(new Entry("lipid membrane	Hi mom!	1.0"));
         System.out.println(arr.search("lipid membrane"));
         System.out.println(arr.search(39).getScore());
         arr.save("../../output/output.txt");
