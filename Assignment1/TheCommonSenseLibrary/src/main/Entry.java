@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 public class Entry implements Comparable<Entry>{
@@ -50,6 +52,14 @@ public class Entry implements Comparable<Entry>{
 
     public void setScore(double score){
         this.score = score;
+    }
+
+    public static void appendEntry(Entry toWrite, String outputFile){
+        try(FileWriter writer = new FileWriter(outputFile, true)){
+            writer.write(toWrite.toString() + "\n");
+        } catch (IOException e){
+            System.out.println("Error: outputFile doesn't exist and cannot be created.\nHint: Try a different file name");
+        }
     }
 
     @Override

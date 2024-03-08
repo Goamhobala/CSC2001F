@@ -6,10 +6,10 @@ public abstract class KnowledgeBase {
     /**
      * To add a single statement to the KnowledgeBase
      * Note that statements with the same statement would be updated based on the confidence score,
-     * with the one with lower confidence score discarded.
+     * with the one with lower confidence score discarded. 
      * @param String statement: The statement to be written to the KnowledgeBase
      */
-    public abstract void insert(Entry newEntry);
+    public abstract void insert(String data);
 
     /** 
      * To write the loaded knowledge base into a file
@@ -51,10 +51,11 @@ public abstract class KnowledgeBase {
     }
 
     public void addFile(String file){
+        // Using BufferedReader for better effienciency
         try(BufferedReader reader = new BufferedReader(new FileReader(file))){
             String statement;
             while ((statement = reader.readLine()) != null){
-                insert(new Entry(statement));
+                insert(statement);
             }
         } catch (IOException e){
             System.out.println("Error: File not found.\nHint: Have you made a typo when entering the file name?");

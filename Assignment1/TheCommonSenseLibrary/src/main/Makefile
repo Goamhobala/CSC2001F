@@ -17,7 +17,7 @@ MAIN = UserInterface.java
 	$(JAVAC) $(JFLAGS) $*.java
 
 CLASSES = UserInterface.java\
-		  KnowledgeBase.java KnowledgeBaseArray.java\
+		  KnowledgeBase.java KnowledgeBaseArray.java KnowledgeBaseBinarySearchTree.java\
 	   	  Entry.java	
 
 default: classes

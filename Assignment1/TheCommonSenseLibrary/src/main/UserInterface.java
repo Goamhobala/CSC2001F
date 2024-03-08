@@ -1,14 +1,11 @@
 public class UserInterface{
     public static void main(String args[]){
-        KnowledgeBaseArray arr = new KnowledgeBaseArray();
-        arr.addFile("../data/GenericsKB.txt");
-        System.out.println(arr.searchIndex("lipid membrane"));
-        System.out.println(arr.search(39).getScore());
-        arr.insert(new Entry("lipid membrane	Hi mom!	1.0"));
-        System.out.println(arr.search("lipid membrane"));
-        System.out.println(arr.search(39).getScore());
-        arr.save("../../output/output.txt");
-        System.out.println(arr.getLength());
+        KnowledgeBaseBinarySearchTree btn = new KnowledgeBaseBinarySearchTree();
+        btn.addFile("../data/GenericsKB.txt");
+        btn.insert("lipid membrane    Lipid membrane contains more unsaturated fatty acids to prevent solidifcation.    0.8787");
+        System.out.println(btn.searchEntry("lipid membrane"));
+        btn.save("../../output/output.txt");
+        System.out.println(btn.getSize());
 
         
     }

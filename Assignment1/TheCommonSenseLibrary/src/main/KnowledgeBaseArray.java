@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
 public class KnowledgeBaseArray extends KnowledgeBase{
     int counter;
     Entry[] statements;
@@ -29,11 +30,21 @@ public class KnowledgeBaseArray extends KnowledgeBase{
     //     }
     // }
 
+
     @Override
-    public void insert(Entry newEntry){
+    public void insert(String data){
+        insert(new Entry(data));
+    }
+
+    public void insert(Entry entry){
+        this.statements[this.counter++] = entry;
+    }
+
+    public void insertNew(String statement){
+        Entry newEntry = new Entry(statement);
         Entry existingEntry = searchEntry(newEntry.getTerm());
         if (existingEntry == null){
-            this.statements[this.counter++] = newEntry;
+            insert(newEntry);
             return;
         }
 
@@ -47,7 +58,8 @@ public class KnowledgeBaseArray extends KnowledgeBase{
 
     @Override
     public void save(String outputFile){ 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))){
+        // Using BufferedWriter for better effienciency
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))){
             for (int i=0; i < this.counter; i++ ){
                 writer.write(this.statements[i].toString() + "\n");
             }
