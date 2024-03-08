@@ -47,9 +47,24 @@ public abstract class KnowledgeBase {
  * sentence.
  */
     public double search(String term, String sentence){
-        return searchEntry(term).getScore();
+        Entry entry = searchEntry(term);
+        if (entry.getSentence().equals(sentence)){
+            return entry.getScore();
+        }
+        else{
+            System.out.println("Sorry, but the term-definition pair doesn't seem to be in the knowledge base");
+            return -1;
+        }
     }
 
+/**
+ * The `addFile` function reads a file line by line using a BufferedReader and inserts each line into a
+ * data structure.
+ * 
+ * @param file The `file` parameter in the `addFile` method represents the path to the file that you
+ * want to read and process. This method reads the contents of the specified file line by line using a
+ * `BufferedReader` for efficiency, and then calls the `insert` method to process each line.
+ */
     public void addFile(String file){
         // Using BufferedReader for better effienciency
         try(BufferedReader reader = new BufferedReader(new FileReader(file))){
