@@ -24,6 +24,7 @@ public class Entry implements Comparable<Entry>{
         this.sentence = scanner.next().trim().replaceAll("[.]", "");
         scanner.useDelimiter(" ");
         this.score = scanner.nextDouble();
+        scanner.close();
     };
     /**
      * Instantiate an Entry object given the term, sentence, and confidence score
