@@ -1,5 +1,10 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+/**
+ * The `UserInterface` class in Java presents a menu for interacting with a knowledge base application,
+ * allowing users to perform various actions such as loading a file, adding statements, looking up
+ * definitions, checking confidence levels, saving to a file, and quitting.
+ */
 public class UserInterface{
     /**
      * The `run` method presents a menu for interacting with a knowledge base
@@ -25,7 +30,7 @@ public class UserInterface{
 
         while (!input.equals("q")){
             if (input.equals( "1")){
-                System.out.println("Please enter the file path");
+                System.out.println("Please enter the file path (Load GenericsKB.txt if input is empty)");
                 a.action1(inputs.nextLine());
             }
             else if (input.equals( "2")){
@@ -33,14 +38,14 @@ public class UserInterface{
                 String term = inputs.nextLine();
                 System.out.println("Please enter the definition of the term: ");
                 String sentence = inputs.nextLine();
-                System.out.println("How confident are you with the term? (Enter a value from 0 to 1)");
-                double score;
-                while (true){
+                System.out.println("How confident are you with the term?");
+                double score = -1;
+                while (!(score <= 1 && score >= 0)){
                     try{
+                        System.out.println("Please ensure that you enter a value between 0 and 1");
                         score = inputs.nextDouble();
-                        break;
                     } catch (InputMismatchException e){
-                        System.out.println("Please ensure that you're enter a value between 0 and 1");
+                        inputs.next();
                     }
                 }
                 a.action2(term, sentence, score);
@@ -61,8 +66,8 @@ public class UserInterface{
             else if (input.equals("5")){
                 System.out.println("Please enter the destination of the file");
                 String path = inputs.nextLine();
-                if (path == null){
-                    path = "../../outpu/output.txt";
+                if (path == ""){
+                    path = "../../output.txt";
                 }
                 a.action5(path);
             }
@@ -70,7 +75,8 @@ public class UserInterface{
             input = inputs.nextLine();
         }
 
+        inputs.close();
 
     }
-
+   
 }

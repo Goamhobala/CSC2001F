@@ -1,15 +1,20 @@
+
 public class KnowledgeBaseAppActions{
     private KnowledgeBase storage;
-    public KnowledgeBaseAppActions(KnowledgeBaseArray storage){
+    public KnowledgeBaseAppActions(KnowledgeBase storage){
         this.storage = storage;
     }
 
     public void action1(String file){
+        if (file.equals("")){
+            storage.addFile("../data/GenericsKB.txt");
+            return;
+        }
         storage.addFile(file);
     }
 
     public void action2(String term, String sentence, double score){
-        storage.insert(new Entry(term, sentence, score));
+        storage.insert(term, sentence, score);
     }
 
     public void action3(String term){

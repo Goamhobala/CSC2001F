@@ -24,7 +24,7 @@ public class KnowledgeBaseBinarySearchTree extends KnowledgeBase{
             this.right = null;
         }
 
-        EntryNode(EntryNode other){
+        EntryNode(Entry other){
            super(other.getTerm(), other.getSentence(), other.getScore());
            this.left = null;
            this.right = null;
@@ -95,10 +95,9 @@ public class KnowledgeBaseBinarySearchTree extends KnowledgeBase{
      */
     @Override
     public void insert(Entry entry){
-        EntryNode node = new EntryNode((EntryNode) entry);
+        EntryNode node = new EntryNode(entry);
         if (this.root == null){
             this.root =  node;
-            System.out.println(this.root);
         }
         else insert(node, this.root);
     }

@@ -16,10 +16,11 @@ JAVA = java
 .java.class: 
 	$(JAVAC) $(JFLAGS) $*.java
 
-CLASSES = UserInterface.java KnowledgeBaseArrayApp.java\
+CLASSES = UserInterface.java KnowledgeBaseArrayApp.java KnowledgeBaseBinarySearchTreeApp.java\
 		  KnowledgeBaseAppActions.java\
 		  KnowledgeBase.java KnowledgeBaseArray.java KnowledgeBaseBinarySearchTree.java\
-	   	  Entry.java	
+	   	  Entry.java\
+		#   TestKnowledgeBase.java
 
 default: classes
 
@@ -30,6 +31,12 @@ classes: $(CLASSES:.java=.class)
 
 runArray: 
 	$(JAVA) KnowledgeBaseArrayApp.java
+
+runTree:
+	$(JAVA) KnowledgeBaseBinarySearchTreeApp.java
+
+test: $(CLASSES) 
+    $(JAVA) -cp ./junit.jar:. TestKnowledgeBase.java;
 
 clear: 
 	rm *.class

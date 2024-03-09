@@ -20,38 +20,30 @@ public class KnowledgeBaseArray extends KnowledgeBase{
         
     }
 
-    // public void addFile(String file){
-    //     try(BufferedReader reader = new BufferedReader(new FileReader(file))){
-    //         String statement;
-    //         while ((statement = reader.readLine()) != null){
-    //             insert(new Entry(statement));
-    //         }
-    //     } catch (IOException e){
-    //         System.out.println("Error: File not found.\nHint: Have you made a typo when entering the file name?");
-    //     }
-    // }
-
-
- 
-    @Override
-    public void insert(String data){
-        insert(new Entry(data));
-    }
+/**
+ * The `insert` method overrides the existing method to insert a new entry with the provided data.
+ * 
+ * @param data The `data` parameter in the `insert` method is a string that represents the statement you
+ * want to saved as Entry and then insert into the data structure.
+ */
+    
 
     @Override
     public void insert(Entry entry){
         this.statements[this.counter++] = entry;
     }
 
-    public void insertNew(String statement){
-        Entry newEntry = new Entry(statement);
+    @Override
+    public void insert(String term, String sentence, double score){
+        Entry newEntry = new Entry(term, sentence, score);
         Entry existingEntry = searchEntry(newEntry.getTerm());
         if (existingEntry == null){
             insert(newEntry);
             return;
         }
 
-        if (newEntry.getScore() - existingEntry.getScore() > 0){
+        if ((newEntry.getScore() - existingEntry.getScore()) > 0){
+
             existingEntry.setSentence(newEntry.getSentence());
             existingEntry.setScore(newEntry.getScore());
         }
@@ -61,8 +53,8 @@ public class KnowledgeBaseArray extends KnowledgeBase{
 
     @Override
     public void save(String outputFile){ 
-        // Using BufferedWriter for better effienciency
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))){
+        // Using BufferedWriter for better effieciency
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))){
             for (int i=0; i < this.counter; i++ ){
                 writer.write(this.statements[i].toString() + "\n");
             }
@@ -72,6 +64,15 @@ public class KnowledgeBaseArray extends KnowledgeBase{
         }
     }
 
+/**
+ * The searchEntry function searches for a specific term in an array of statements and returns the
+ * corresponding Entry object if found.
+ * 
+ * @param term The `term` parameter in the `searchEntry` method is the term that you want to search for
+ * in the entries. The method searches for this term in the entries and returns the corresponding
+ * `Entry` object if found.
+ * @return The `searchEntry` method is returning an `Entry` object. If the object is not found, it returns `null`.
+ */
 
     @Override
     public Entry searchEntry(String term){
@@ -102,6 +103,14 @@ public class KnowledgeBaseArray extends KnowledgeBase{
         return -1;
 
     }
+/**
+ * The `search` function in Java returns the `Entry` object at the specified index in the `statements`
+ * array.
+ * 
+ * @param index The `search` method you provided takes an integer `index` as a parameter. This index is
+ * used to retrieve an `Entry` object from the `statements` array at the specified index.
+ * @return An `Entry` object from the `statements` array at the specified `index`.
+ */
     public Entry search(int index){
         return this.statements[index];
     }

@@ -64,13 +64,13 @@ public abstract class KnowledgeBase {
  */
     public double search(String term, String sentence){
         Entry entry = searchEntry(term);
-        if (entry.getSentence().equals(sentence)){
-            return entry.getScore();
-        }
-        else{
-            ;
+        if (entry == null){
             return -1;
         }
+        else if (entry.getSentence().equals(sentence)){
+            return entry.getScore();
+        }
+        return -1;
     }
 
 /**
