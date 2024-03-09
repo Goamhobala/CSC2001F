@@ -1,32 +1,12 @@
-public class KnowledgeBaseArrayApp extends UserInterface{
-    private static KnowledgeBase storage;
+/**
+ * The main program class KnowledgeBaseArrayApp initializes objects for managing a knowledge base array and user
+ * interface actions.
+ */
+public class KnowledgeBaseArrayApp{
     public static void main(String[] args){
-        storage = new KnowledgeBaseArray();
-        
+        KnowledgeBaseArray arr = new KnowledgeBaseArray();
+        KnowledgeBaseAppActions actions = new KnowledgeBaseAppActions(arr);
+        UserInterface ui = new UserInterface();
+        ui.run(actions);
     }
-}
-
-class KnowledgeBaseArrayActions implements KnowledgeBaseAppActions {
-    private KnowledgeBaseArray arr;
-    KnowledgeBaseArrayActions(KnowledgeBaseArray arr){
-        this.arr = arr;
-    }
-    @Override
-    public void action1(String file){
-        arr.addFile(file);
-        System.out.println("File added.");
-    }
-    @Override
-    public void action2(String statement){
-        arr.insert(statement);
-        System.out.println("Statement inserted");
-    }
-    @Override
-    public void action3(String term){
-        System.out.println("Here you go:\n %s".format(arr.search(term)));
-    }
-    @Override
-    public void action4(String term, String sentence);
-    @Override
-    public void action5(String file);
 }

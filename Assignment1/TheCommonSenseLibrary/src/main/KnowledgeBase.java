@@ -1,6 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+/**
+ * The `KnowledgeBase` class provides methods for inserting, searching, and saving entries in a
+ * knowledge base, as well as reading entries from a file.
+ */
 public abstract class KnowledgeBase {
     
     /**
@@ -9,7 +13,15 @@ public abstract class KnowledgeBase {
      * with the one with lower confidence score discarded. 
      * @param String statement: The statement to be written to the KnowledgeBase
      */
-    public abstract void insert(String data);
+    public abstract void insert(Entry data);
+
+    public void insert(String term, String sentence, double score){
+        insert(new Entry(term, sentence, score));
+    }
+
+    public void insert(String statement){
+        insert(new Entry(statement));
+    }
 
     /** 
      * To write the loaded knowledge base into a file
@@ -33,18 +45,22 @@ public abstract class KnowledgeBase {
  * returned by the `searchEntry` method when passing the `term` as a parameter.
  */
     public String search(String term){
-        return searchEntry(term).toString();
+        Entry target = searchEntry(term);
+        if (target != null){
+            return target.toString();
+        }
+        return null;
     }
 
+
 /**
- * This Java function searches for a specific term in a sentence and returns the score associated with
- * the search term.
+ * This method searches for a term in an entry and returns the score if the term-definition pair is found in the knowledge base, otherwise it returns -1.
  * 
- * @param term The term parameter is the word or phrase that you are searching for within the sentence.
- * @param sentence The `sentence` parameter is a string that represents the text in which you want to
- * search for a specific term.
- * @return The code snippet is returning the score of the search entry for the given term in the
- * sentence.
+ * @param term The term parameter is a string that represents the term you are searching for in the
+ * entry.
+ * @param sentence The definition of the term
+ * @return If the sentence in the entry matching the term is found in the knowledge base, the method
+ * will return the score of that entry. Otherwise, it will return -1.
  */
     public double search(String term, String sentence){
         Entry entry = searchEntry(term);
@@ -52,7 +68,7 @@ public abstract class KnowledgeBase {
             return entry.getScore();
         }
         else{
-            System.out.println("Sorry, but the term-definition pair doesn't seem to be in the knowledge base");
+            ;
             return -1;
         }
     }

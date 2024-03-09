@@ -21,7 +21,7 @@ public class Entry implements Comparable<Entry>{
         this.term = scanner.next().trim();
         scanner.useDelimiter("\\d");
         // To remove the whitespaces separating the sentence and confidence score
-        this.sentence = scanner.next().trim();
+        this.sentence = scanner.next().trim().replaceAll("[.]", "");
         scanner.useDelimiter(" ");
         this.score = scanner.nextDouble();
     };

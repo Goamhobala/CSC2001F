@@ -11,6 +11,7 @@ public class KnowledgeBaseBinarySearchTree extends KnowledgeBase{
         double score;
         EntryNode left;
         EntryNode right;
+
         EntryNode(String term, String sentence, double score, EntryNode left, EntryNode right){
             super(term, sentence, score);
             this.left = left;
@@ -22,6 +23,13 @@ public class KnowledgeBaseBinarySearchTree extends KnowledgeBase{
             this.left = null;
             this.right = null;
         }
+
+        EntryNode(EntryNode other){
+           super(other.getTerm(), other.getSentence(), other.getScore());
+           this.left = null;
+           this.right = null;
+        }
+
     
     }
 
@@ -86,12 +94,13 @@ public class KnowledgeBaseBinarySearchTree extends KnowledgeBase{
      * data type that you want to store in the data structure.
      */
     @Override
-    public void insert(String statement){
+    public void insert(Entry entry){
+        EntryNode node = new EntryNode((EntryNode) entry);
         if (this.root == null){
-            this.root = new EntryNode(statement);
+            this.root =  node;
             System.out.println(this.root);
         }
-        else insert(new EntryNode(statement), this.root);
+        else insert(node, this.root);
     }
 
     private void insert(EntryNode newEntry, EntryNode node){

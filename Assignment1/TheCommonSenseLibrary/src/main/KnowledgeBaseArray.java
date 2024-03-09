@@ -3,13 +3,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class KnowledgeBaseArray extends KnowledgeBase{
-    int counter;
+    private int counter;
+    private int INITIAL_CAPACITY = 100100;
     Entry[] statements;
     /**
      * Instantiate an empty KnowledgeBaseArray
      */
     public KnowledgeBaseArray(){
-        this.statements = new Entry[100100];
+        this.statements = new Entry[INITIAL_CAPACITY];
         this.counter = 0;
     }
 
@@ -31,11 +32,13 @@ public class KnowledgeBaseArray extends KnowledgeBase{
     // }
 
 
+ 
     @Override
     public void insert(String data){
         insert(new Entry(data));
     }
 
+    @Override
     public void insert(Entry entry){
         this.statements[this.counter++] = entry;
     }

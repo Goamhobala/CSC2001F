@@ -6,7 +6,7 @@ JFLAGS = -g
 JAVA = java
 # JVMFLAGS = -cp ./lib/javafx-sdk-17.0.10/lib/*
 
-MAIN = UserInterface.java
+# MAIN = .java
 
 
 
@@ -16,7 +16,8 @@ MAIN = UserInterface.java
 .java.class: 
 	$(JAVAC) $(JFLAGS) $*.java
 
-CLASSES = UserInterface.java\
+CLASSES = UserInterface.java KnowledgeBaseArrayApp.java\
+		  KnowledgeBaseAppActions.java\
 		  KnowledgeBase.java KnowledgeBaseArray.java KnowledgeBaseBinarySearchTree.java\
 	   	  Entry.java	
 
@@ -27,8 +28,8 @@ classes: $(CLASSES:.java=.class)
 # moveClass:
 # 	mv *.class ./bin
 
-run: 
-	$(JAVA) $(MAIN)
+runArray: 
+	$(JAVA) KnowledgeBaseArrayApp.java
 
 clear: 
 	rm *.class
