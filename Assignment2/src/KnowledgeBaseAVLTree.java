@@ -1,84 +1,138 @@
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 public class KnowledgeBaseAVLTree extends KnowledgeBaseTree{
-    class EntryNodeAVL extends EntryNode{
-        String term;
-        String sentence;
-        double score;
-        EntryNodeAVL left = null;
-        EntryNodeAVL right = null;
-        int height;
+    int insertionCount = 0;
+    // class EntryNodeAVL extends EntryNode{
+    //     String term;
+    //     String sentence;
+    //     double score;
+    //     EntryNodeAVL left = null;
+    //     EntryNodeAVL right = null;
 
-        EntryNodeAVL(String term, String sentence, double score){
-            super(term, sentence, score);
-            this.height = 0;
+    //     EntryNodeAVL(String term, String sentence, double score){
+    //         super(term, sentence, score);
 
-        }
+    //     }
     
-        EntryNodeAVL(String statement){
-            super(statement);
-        }
+    //     EntryNodeAVL(String statement){
+    //         super(statement);
+    //     }
 
-        EntryNodeAVL(Entry other){
-           super(other);
-            }
+    //     EntryNodeAVL(Entry other){
+    //         super(other);
+    //         int height = 0;
+    //     }
     
-    }
+    // }
     
-    private EntryNodeAVL root;
+    private EntryNode root; 
+    
 
-    
-
-    public KnowledgeBaseAVLTree(Entry root){
+    public KnowledgeBaseAVLTree(EntryNode root){
         super(root);
     }
     public KnowledgeBaseAVLTree(){
-        super();
+        this.root = null;
     }
-
-    // @Override
-    // public void insert(Entry entry){
-    //     super.insert(entry);
-    // }
 
     @Override
-    protected void insert(EntryNode newEntry, EntryNode node){
-        super.insert(newEntry, node);
-        balance((EntryNodeAVL) node);
+    public void insert(Entry entry){
+        EntryNode node = new EntryNode(entry);
+        this.root = insert(node, root);
     }
 
-    private int balanceFactor(EntryNodeAVL node){
-        return node.right.height - node.left.height;
+    @Override
+    protected EntryNode insert(EntryNode newEntry, EntryNode node){
+        this.insertionCount++;
+        if (node == null){
+            
+            node = newEntry;
+        }
+        else if (newEntry.compareTo(node) > 0){
+            node.right = insert(newEntry, node.right);
+        }
+        else{
+            node.left = insert(newEntry, node.left);
+        }
+        node = balance(node);
+        return node;
     }
 
-    private void balance(EntryNodeAVL node){
-        node.height = getHeight(node);
-        if (balanceFactor(node) >= 2){
+    @Override
+    public Entry searchEntry(String term){
+        return super.searchEntry(term, root);
+    }
+
+    @Override
+    public void save(String outputFile){
+        try (FileWriter writer = new FileWriter(outputFile)){
+        } catch (IOException e){
+            System.out.println("Error: outputFile doesn't exist and cannot be created.\nHint: Try a different file name");
+        }
+
+        save(this.root, outputFile);
+        
+    }
+
+    private int balanceFactor(EntryNode node){
+        return getHeight(node.right) - getHeight(node.left);
+    }
+
+    private EntryNode balance(EntryNode node){
+        fixHeight(node);
+        insertionCount++;
+        if (balanceFactor(node) == 2){
+            insertionCount++;
             if (balanceFactor(node.right) < 0){
                 node.right = rotateRight(node.right);
             }
             node = rotateLeft(node);
         }
 
-        else if (balanceFactor(node) <= -2){
+        else if (balanceFactor(node) == -2){
+            insertionCount++;
             if (balanceFactor(node.left) > 0){
                 node.left = rotateLeft(node.left);
             }
             node = rotateRight(node);
         }
+    return node;
 
     }
 
-    private EntryNodeAVL rotateLeft(EntryNodeAVL top){
-        EntryNodeAVL newTop = top.right;
+    private EntryNode rotateLeft(EntryNode top){
+        EntryNode newTop = top.right;
         top.right = newTop.left;
         newTop.left = top;
+        fixHeight(newTop);
+        fixHeight(top);
         return newTop;
     }
 
-    private EntryNodeAVL rotateRight(EntryNodeAVL top){
-        EntryNodeAVL newTop = top.left;
+    private EntryNode rotateRight(EntryNode top){
+        EntryNode newTop = top.left;
         top.left = newTop.right;
         newTop.right = top;
+        fixHeight(newTop);
+        fixHeight(top);
         return newTop;
+    }
+
+    private void fixHeight(EntryNode node){
+        node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
+    }
+
+    public int getHeight(EntryNode node){
+        if (node == null){
+            return -1;
+        }
+        return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+    }
+
+    public int getOperationCount(){
+        return insertionCount + super.searchCount;
     }
     
 }

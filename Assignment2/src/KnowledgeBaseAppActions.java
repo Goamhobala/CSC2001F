@@ -1,4 +1,8 @@
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.FileWriter;
 public class KnowledgeBaseAppActions{
     private KnowledgeBase storage;
     public KnowledgeBaseAppActions(KnowledgeBase storage){
@@ -17,28 +21,49 @@ public class KnowledgeBaseAppActions{
         storage.insert(term, sentence, score);
     }
 
-    public void actionSearchTerm(String term){
+    public void actionSearchTermSingle(String term){
         String target = storage.search(term);
         if (target != null){
-            System.out.println("Here you go:\n %s\n".format(target));}
+            System.out.println(target);}
         else{
-            System.out.println("Sorry but it seems like the term you're looking for is not included in the knowledge base");
+            System.out.println("Term not found: " + term);
         }
     }
 
-    public void actionSearchTermSentence(String term, String sentence){
-        double score = storage.search(term, sentence);
-        if (score == -1){
-            System.out.println("Sorry, but the term-definition pair doesn't seem to be in the knowledge base\n");
-            return;
+    public void actionSearchTermFile(String path){
+        if (path.equals("")){
+            path = "../data/GenericsKB-queries.txt";
         }
-        System.out.println("Confidence score: " + score + "\n");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))){
+            String term;
+            while ((term = reader.readLine()) != null){
+                actionSearchTermSingle(term);
+            }
+        }
+        catch (IOException e){
+                System.out.println("Path not found");
+            }
+        
     }
-    
-    ;
 
     public void actionSave(String file){
+        if (file.equals("")){
+            file = "../output/output.txt";
+        }
         storage.save(file);
-        System.out.println("Knowledge base is saved to '%s'\n".format(file));
+        // System.out.println("Knowledge base is saved to '%s'\n".format(file));
+    }
+
+    public void actionSaveData(String file, int size, String type, int count){
+        if (file.equals("")){
+            file = "../output/result.csv";
+        }
+        try (FileWriter writer = new FileWriter(file, true)){
+            writer.write(String.format("%d, %s, %s\n", size, type, count ));
+        }
+        catch (IOException e){
+            System.out.println("Path not found");
+        }
     }
 }

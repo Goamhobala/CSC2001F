@@ -1,5 +1,5 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 /**
  * The `UserInterface` class in Java presents a menu for interacting with a knowledge base application,
  * allowing users to perform various actions such as loading a file, adding statements, looking up
@@ -17,10 +17,10 @@ public class UserInterface{
 
             How could we assist you?
             [1] Load a knowledge base from a file
-            [2] Add a new statement to the knowledge base
+            [2] Look up all the terms found in a file
             [3] Look up definition of a term
-            [4] Look up how confident we are about the definition of a term
-            [5] Save the knowledge base to a file;
+            [4] Insert a new statement
+            [5] Save the knowledge base to a file
             [q] Quit
             """;
         
@@ -34,6 +34,15 @@ public class UserInterface{
                 a.actionAddFile(inputs.nextLine());
             }
             else if (input.equals( "2")){
+                System.out.println("Please enter the file path (Load GenericsKB-queries.txt if input is empty)");
+                a.actionSearchTermFile(inputs.nextLine());
+            }
+            else if (input.equals( "3")){
+                System.out.println("");
+                a.actionSearchTermSingle(inputs.nextLine());
+            }
+
+            else if (input.equals("4")){
                 System.out.println("Please enter the term: ");
                 String term = inputs.nextLine();
                 System.out.println("Please enter the definition of the term: ");
@@ -49,25 +58,12 @@ public class UserInterface{
                     }
                 }
                 a.actionInsert(term, sentence, score);
-
-
-            
-            }
-            else if (input.equals( "3")){
-                System.out.println("Please enter the term you'd like to look up for");
-                a.actionSearchTerm(inputs.nextLine());
-            }
-            else if (input.equals( "4")){
-                System.out.println("Please enter the term you'd like to check for");
-                String term = inputs.nextLine();
-                System.out.println("Please enter the definition of the term");
-                a.actionSearchTermSentence(term, inputs.nextLine());
             }
             else if (input.equals("5")){
-                System.out.println("Please enter the destination of the file");
+                System.out.println("Please enter the destination of the file (Saved to ../output/output.txt if nothing is entered)");
                 String path = inputs.nextLine();
                 if (path == ""){
-                    path = "../../output.txt";
+                    path = "../output/output.txt";
                 }
                 a.actionSave(path);
             }

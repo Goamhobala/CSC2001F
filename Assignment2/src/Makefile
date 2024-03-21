@@ -7,24 +7,31 @@ JAVA = java
 PY = python
 
 # Remove default target location for compiled classes
-.SUFFIXES .java .class
+.SUFFIXES: .java .class
 
 .java.class:
 	$(JAVAC) $(JFLAGS) $*.java
 
-CLASSES = UserInterface.java KnowledgeBaseAVLTreeApp.java\
-	KnowledgeBase.java KnowledgeBaseTree.java KnowledgeBaseTreeAVL.java\
-	Entry.java
+CLASSES = UserInterface.java UIApp.java AutomatedApp.java KnowledgeBaseAppActions.java \
+	KnowledgeBase.java KnowledgeBaseTree.java KnowledgeBaseAVLTree.java \
+	Entry.java\
 
 default: classes
 
 classes: $(CLASSES:.java=.class)
 
+SOURCE ?= "../data/GenericsKB.txt"
+
+QUERY ?= "../data/GenericsKB-queries.txt"
+
 run:
-   $(JAVA) KnowledgeBaseAVLTreeApp.java
+	$(JAVA) AutomatedApp.java $(SOURCE) $(QUERY)
+
+runUI:
+	$(JAVA) UIApp.java
 
 runExperiment:
-   $(PY) experiment.py
+	$(PY) experiment.py
 
 clear:
-   rm *.class
+	rm *.class

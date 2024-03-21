@@ -5,6 +5,7 @@ import java.io.IOException;
  * and manage knowledge base entries.
  */
 public class KnowledgeBaseTree extends KnowledgeBase{
+    int searchCount = 0;
     class EntryNode extends Entry{
         String term;
         String sentence;
@@ -16,6 +17,7 @@ public class KnowledgeBaseTree extends KnowledgeBase{
         // the `EntryNode` to maintain the hierarchical relationship between nodes in the binary search
         // tree by pointing to the right child node.
         EntryNode right;
+        int height = 0;
 
         EntryNode(String term, String sentence, double score){
             super(term, sentence, score);
@@ -51,10 +53,8 @@ public class KnowledgeBaseTree extends KnowledgeBase{
 
    // The constructor `public KnowledgeBaseTree(){ this(null); }` in the
    // `KnowledgeBaseTree` class is a no-argument constructor that calls another constructor
-   // within the same class passing `null` as an argument. This is a common practice in Java known as
-   // constructor chaining or constructor delegation.
     public KnowledgeBaseTree(){
-        this(null);
+        this.root = null;
     }
 
 
@@ -77,6 +77,7 @@ public class KnowledgeBaseTree extends KnowledgeBase{
             return null;
         }
         int compare = term.compareTo(node.getTerm());
+        searchCount++;
         if (compare == 0){
             return node;
         }
@@ -104,10 +105,10 @@ public class KnowledgeBaseTree extends KnowledgeBase{
         if (this.root == null){
             this.root =  node;
         }
-        else insert(node, this.root);
+        else this.root = insert(node, this.root);
     }
 
-    protected void insert(EntryNode newEntry, EntryNode node){
+    protected EntryNode insert(EntryNode newEntry, EntryNode node){
         int compare = newEntry.compareTo(node);
         if (compare < 0){
             if (node.left == null){
@@ -132,6 +133,7 @@ public class KnowledgeBaseTree extends KnowledgeBase{
                 node.setScore(newEntry.getScore());
             }
         }
+        return node;
     }
 
 
@@ -181,13 +183,5 @@ public class KnowledgeBaseTree extends KnowledgeBase{
         return 1 + getSize(node.left) + getSize(node.right);
     }
 
-    public int getHeight(EntryNode node){
-        if (node == null){
-            return -1;
-        }
-        return 1 + Math.max(getHeight(node.left), getHeight(node.right));
-
-
-    }
 } 
 
