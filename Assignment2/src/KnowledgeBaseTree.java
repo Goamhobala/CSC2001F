@@ -17,10 +17,10 @@ public class KnowledgeBaseTree extends KnowledgeBase{
         // tree by pointing to the right child node.
         EntryNode right;
 
-        EntryNode(String term, String sentence, double score, EntryNode left, EntryNode right){
+        EntryNode(String term, String sentence, double score){
             super(term, sentence, score);
-            this.left = left;
-            this.right = right;
+            this.left = null;
+            this.right = null;
         }
     
         EntryNode(String statement){
@@ -59,7 +59,7 @@ public class KnowledgeBaseTree extends KnowledgeBase{
 
 
     /**
-     * The searchEntry function in Java searches for an entry based on a given term.
+     * The searchEntry function searches for an entry based on a given term.
      * 
      * @param term The `term` parameter in the `searchEntry` method is the term that you want to search
      * for in the data structure. This method is used to search for an entry in the data structure
@@ -165,7 +165,7 @@ public class KnowledgeBaseTree extends KnowledgeBase{
 
 
     /**
-     * The `getSize` function in Java returns the size of a binary tree starting from the root node.
+     * The `getSize` function returns the size of a binary tree starting from the root node.
      * 
      * @return The `getSize()` method is being called with the root node of the tree as an argument,
      * and it returns the size of the tree starting from that root node.
@@ -180,6 +180,14 @@ public class KnowledgeBaseTree extends KnowledgeBase{
         }
         return 1 + getSize(node.left) + getSize(node.right);
     }
+
+    public int getHeight(EntryNode node){
+        if (node == null){
+            return -1;
+        }
+        return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+
+
 
 } 
 

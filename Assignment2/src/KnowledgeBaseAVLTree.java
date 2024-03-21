@@ -3,12 +3,14 @@ public class KnowledgeBaseAVLTree extends KnowledgeBaseTree{
         String term;
         String sentence;
         double score;
-        EntryNodeAVL left;
-        EntryNodeAVL right;
-        int height = 0;
+        EntryNodeAVL left = null;
+        EntryNodeAVL right = null;
+        int height;
 
-        EntryNodeAVL(String term, String sentence, double score, EntryNodeAVL left, EntryNodeAVL right){
-            super(term, sentence, score, left, right);
+        EntryNodeAVL(String term, String sentence, double score){
+            super(term, sentence, score);
+            this.height = 0;
+
         }
     
         EntryNodeAVL(String statement){
@@ -31,37 +33,39 @@ public class KnowledgeBaseAVLTree extends KnowledgeBaseTree{
     public KnowledgeBaseAVLTree(){
         super();
     }
-    
-    @Override
-    public Entry searchEntry(String term){
-        balance();
-        update();
-        return searchEntry(term, root);
-    }
+
+    // @Override
+    // public void insert(Entry entry){
+    //     super.insert(entry);
+    // }
 
     @Override
-    protected EntryNode searchEntry(String term, EntryNode node){
-        balance();
-        update();
-        return super.searchEntry(term, node);
-    }
-
-    @Override
-    public void insert(Entry entry){
-        balance();
-        update();
-        super.insert(entry);
-    }
-
-    @Override
-    protected void insert(EntryNode newEntry, EntryNode node){
-        balance();
-        update();
+    protected void insert(EntryNodeAVL newEntry, EntryNodeAVL node){
         super.insert(newEntry, node);
+        balance(node);
     }
 
-    
+    private int balanceFactor(EntryNodeAVL node){
+        return node.right.height - node.left.height;
+    }
 
+    private void balance(EntryNodeAVL node){
+        node.height = getHeight(node);
 
+    }
+
+    private EntryNodeAVL rotateLeft(EntryNodeAVL top){
+        EntryNodeAVL newTop = top.right;
+        top.right = newTop.left;
+        newTop.left = top;
+        return newTop;
+    }
+
+    private EntryNodeAVL rotateRight(EntryNodeAVL top){
+        EntryNodeAVL newTop = top.left;
+        top.left = newTop.right;
+        newTop.right = top;
+        return newTop;
+    }
     
 }
