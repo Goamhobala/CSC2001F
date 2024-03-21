@@ -188,6 +188,6 @@ public class KnowledgeBaseTree extends KnowledgeBase{
         return 1 + Math.max(getHeight(node.left), getHeight(node.right));
 
 
-
+    }
 } 
 

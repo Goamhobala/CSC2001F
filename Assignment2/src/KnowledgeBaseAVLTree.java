@@ -40,9 +40,9 @@ public class KnowledgeBaseAVLTree extends KnowledgeBaseTree{
     // }
 
     @Override
-    protected void insert(EntryNodeAVL newEntry, EntryNodeAVL node){
+    protected void insert(EntryNode newEntry, EntryNode node){
         super.insert(newEntry, node);
-        balance(node);
+        balance((EntryNodeAVL) node);
     }
 
     private int balanceFactor(EntryNodeAVL node){
@@ -51,6 +51,19 @@ public class KnowledgeBaseAVLTree extends KnowledgeBaseTree{
 
     private void balance(EntryNodeAVL node){
         node.height = getHeight(node);
+        if (balanceFactor(node) >= 2){
+            if (balanceFactor(node.right) < 0){
+                node.right = rotateRight(node.right);
+            }
+            node = rotateLeft(node);
+        }
+
+        else if (balanceFactor(node) <= -2){
+            if (balanceFactor(node.left) > 0){
+                node.left = rotateLeft(node.left);
+            }
+            node = rotateRight(node);
+        }
 
     }
 
