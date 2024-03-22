@@ -39,6 +39,7 @@ public class KnowledgeBaseAVLTree extends KnowledgeBaseTree{
 
     @Override
     public Entry searchEntry(String term){
+
         return super.searchEntry(term, root);
     }
 

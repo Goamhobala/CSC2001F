@@ -55,12 +55,12 @@ public class KnowledgeBaseAppActions{
         // System.out.println("Knowledge base is saved to '%s'\n".format(file));
     }
 
-    public void actionSaveData(String file, int size, String type, int count){
+    public void actionSaveData(String file, int size, String type, int insertionCount, int searchCount){
         if (file.equals("")){
             file = "../output/result.csv";
         }
         try (FileWriter writer = new FileWriter(file, true)){
-            writer.write(String.format("%d, %s, %s\n", size, type, count ));
+            writer.write(String.format("%d, %s, %d, %d\n", size, type, insertionCount, searchCount ));
         }
         catch (IOException e){
             System.out.println("Path not found");
