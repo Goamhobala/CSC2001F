@@ -10,7 +10,7 @@ PY = python
 .SUFFIXES: .java .class
 
 .java.class:
-	$(JAVAC) $(JFLAGS) -d ../bin/*.java
+	$(JAVAC) $(JFLAGS) -d ../bin/ $*.java
 
 CLASSES = UserInterface.java UIApp.java AutomatedApp.java KnowledgeBaseAppActions.java \
 	KnowledgeBase.java KnowledgeBaseTree.java KnowledgeBaseAVLTree.java \

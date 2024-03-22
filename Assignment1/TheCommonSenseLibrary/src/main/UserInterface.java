@@ -1,5 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 /**
  * The `UserInterface` class in Java presents a menu for interacting with a knowledge base application,
  * allowing users to perform various actions such as loading a file, adding statements, looking up
@@ -31,7 +32,7 @@ public class UserInterface{
         while (!input.equals("q")){
             if (input.equals( "1")){
                 System.out.println("Please enter the file path (Load GenericsKB.txt if input is empty)");
-                a.action1(inputs.nextLine());
+                a.actionAddFile(inputs.nextLine());
             }
             else if (input.equals( "2")){
                 System.out.println("Please enter the term: ");
@@ -48,20 +49,18 @@ public class UserInterface{
                         inputs.next();
                     }
                 }
-                a.action2(term, sentence, score);
-
-
+                a.actionInsert(term, sentence, score);
             
             }
             else if (input.equals( "3")){
                 System.out.println("Please enter the term you'd like to look up for");
-                a.action3(inputs.nextLine());
+                a.actionSearchTerm(inputs.nextLine());
             }
             else if (input.equals( "4")){
                 System.out.println("Please enter the term you'd like to check for");
                 String term = inputs.nextLine();
                 System.out.println("Please enter the definition of the term");
-                a.action4(term, inputs.nextLine());
+                a.actionSearchTermSentence(term, inputs.nextLine());
             }
             else if (input.equals("5")){
                 System.out.println("Please enter the destination of the file");
@@ -69,7 +68,7 @@ public class UserInterface{
                 if (path == ""){
                     path = "../../output.txt";
                 }
-                a.action5(path);
+                a.actionSave(path);
             }
             System.out.println(menu);
             input = inputs.nextLine();

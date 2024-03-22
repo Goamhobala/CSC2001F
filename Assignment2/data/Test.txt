@@ -1,0 +1,10 @@
+plot	Plots continue for years.	1.0
+apportionment	Apportionment is distribution	1.0
+cliff swallow	Cliff swallows are swallows.	1.0
+peripheral nerve	Peripheral nerves pass out from the various ganglia to supply different parts of the body.	0.8163343667984009
+torrent salamander	Torrent salamanders live and breed in clear, cold, fast-flowing streams with rock or gravel bottoms.	0.8076285719871521
+nickel compound	Nickel compounds can be green, blue, gray, or black.	0.7424909472465515
+pineal melatonin	Pineal melatonin is produced during the night.	0.7978999614715576
+outrigger canoe	An outrigger canoe is a canoe	1.0
+white shirt	White shirts cover chests.	1.0
+agate	Agate is gemstones.	1.0

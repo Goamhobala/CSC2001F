@@ -5,7 +5,7 @@ public class KnowledgeBaseAppActions{
         this.storage = storage;
     }
 
-    public void action1(String file){
+    public void actionAddFile(String file){
         if (file.equals("")){
             storage.addFile("../data/GenericsKB.txt");
             return;
@@ -13,11 +13,11 @@ public class KnowledgeBaseAppActions{
         storage.addFile(file);
     }
 
-    public void action2(String term, String sentence, double score){
+    public void actionInsert(String term, String sentence, double score){
         storage.insert(term, sentence, score);
     }
 
-    public void action3(String term){
+    public void actionSearchTerm(String term){
         String target = storage.search(term);
         if (target != null){
             System.out.println("Here you go:\n %s\n".format(target));}
@@ -26,7 +26,7 @@ public class KnowledgeBaseAppActions{
         }
     }
 
-    public void action4(String term, String sentence){
+    public void actionSearchTermSentence(String term, String sentence){
         double score = storage.search(term, sentence);
         if (score == -1){
             System.out.println("Sorry, but the term-definition pair doesn't seem to be in the knowledge base\n");
@@ -37,7 +37,7 @@ public class KnowledgeBaseAppActions{
     
     ;
 
-    public void action5(String file){
+    public void actionSave(String file){
         storage.save(file);
         System.out.println("Knowledge base is saved to '%s'\n".format(file));
     }

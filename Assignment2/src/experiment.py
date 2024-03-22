@@ -62,18 +62,21 @@ def main():
         experiments.append(experiment)
         i *=  3
     data = readData()
-    fig, (ax1, ax2) = plt.subplots(ncols=2, sharex=True, sharey = True)
+    fig, (ax1, ax2) = plt.subplots(ncols=2, sharex=True)
     
     x = np.array([datum[0] for datum in data])
     y_insert = [datum[2] for datum in data]
     y_search = [datum[3] for datum in data]
+    # Axis Insert
     ax1.scatter(x, y_insert, color="r", label="Empirical")
-    ax1.plot(x, np.log(x.astype(float)), label="Average/Worst")
+    ax1.plot(x, np.log(x.astype(float)), label="Average/Worst", color="b")
     ax1.axhline(y=1.1, color="g", linewidth=2, label="Best")
-    ax1.set_ylim(1, 40)
+    ax1.set_title("insert()")
+    
+    # Axis Search
     ax2.scatter(x, y_search, color="k", label="Empirical")
-    ax2.plot(x, np.log(x.astype(float)))
-    ax2.plot(x, np.log(x.astype(float)), label="Average/Worst")
+    ax2.plot(x, np.log(x.astype(float)), label="Average/Worst", color="b")
+    ax2.set_title("search()")
     ax2.axhline(y=1.1, color="g", linewidth=2, label="Best")
     for ax in plt.gcf().get_axes():
         ax.legend()
@@ -82,7 +85,6 @@ def main():
         ax.set_xlabel("Size of Datasets")
         ax.tick_params(axis='x', rotation=90) 
     plt.tight_layout()
-    plt.title("Time Complexity Analysis")
     plt.show()
     
     
