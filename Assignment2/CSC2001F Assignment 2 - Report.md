@@ -1,5 +1,15 @@
  **Jing Yeh**
  **YHXJIN001**
+### Table of Contents
+ [[#To Start the Program]]
+ [[#OOP Design]]
+    - [[#Category 1: AVL Tree]]
+    - [[#Category 2: Users]]
+[[#Experiments]]
+	- [[#1. and 2. Testing the AVL Tree]]
+	- [[#3. Experiment]]
+[[#Creativity]]
+[[#Git log]]
 ### To Start the Program
 Two versions of the program for users' convenience are included: the UIApp.java displays a text-based interface with additional functionalities such as adding a single statement to the knowledge base. AutomatedApp.java is the version with less flexibility but allows more efficient scaling and invocation. Only the UI version of the app can be run using 
 ```
@@ -9,19 +19,22 @@ However, to view the result of experiment, please run
 ```
 make runExperiment
 ```
-This command invokes a python scripts that automate every aspect of the experiment as well as generate a beautiful graph 🤓
+This command invokes a python script that automate every aspect of the experiment as well as generate a beautiful graph 🤓
+
+<div style="page-break-after: always;"></div>
 
 ### OOP Design
 The java files can be roughly categorised into two types, one dealing with the AVL tree, the other dealing with the users.
 
 ##### Category 1: AVL Tree
-Some of the classes from Assignment 1 has been reused, as the AVL tree can be considered as a modification of the **KnowledgeBaseTree**, a vanilla binary search tree, that we have implemented in the previous assignment, which is itself inherited from the abstract **KnowledgeBase** class. The term, sentence and score in each line have been grouped into one single data type named **Entry**, which is also the parent class of **EntryNode**, the hybrid of BinaryTreeNode and Entry. This is done to promote code reusability and to prevent over-modularisation.
+Some of the classes from Assignment 1 have been reused, as the AVL tree can be considered as a modification of the **KnowledgeBaseTree**, a vanilla binary search tree, that we have implemented in the previous assignment, which is itself inherited from the abstract **KnowledgeBase** class. The term, sentence and score in each line have been grouped into one single data type named **Entry**, which is also the parent class of **EntryNode**, the hybrid of BinaryTreeNode and Entry. This is done to promote code reusability and to prevent over-modularisation.
 
 ##### Category 2: Users
-As mentioned previously, two versions of the main programs have been included for different purposes. The user either can open the **UIApp** version of the program that has a text-based menu, or run the python experiment script, **experiment.py** to view the relevant data and analyses relevant to the AVL tree. An **KnowledgeBaseAppActions** class, which acts as a bridge between the app and the tree, has been constructed to promote separation of concern as well as code reusability.
-
+As mentioned previously, two versions of the main programs have been included for different purposes. The user either can open the **UIApp** version of the program that has a text-based menu, or run the python experiment script, **experiment.py** to view the relevant data and analyses relevant to the AVL tree. An **KnowledgeBaseAppActions** class, which acts as a bridge between the app and the tree, has been constructed to promote separation of concern and code reusability.
 
 ### Experiments
+The goals of the experiment are to ensure that the AVL tree is correctly implemented as well as comparing the actual time complexities of this implementation to its theoretical time complexities.
+
 The procedure is as followed:
 1. Test if the AVL tree can correctly load the GenericsKB.txt file by writing all the nodes to a txt file named output.txt.
 2. Use a manually constructed, toy txt file to test if the tree correctly handle statements already loaded into the data set and those that are not.
@@ -61,7 +74,7 @@ The empirical results obtained from loading random sets of data can be roughly r
 make runExperiment
 ```
 
-The python script **experiment.py** does two thing: It generates random sets of data, with sizes differ logarithmically (log_3 is used as it is the largest integer that provides 10 sets of data within the range of 50000). 
+The python script **experiment.py** does two things: It generates random sets of data, with sizes differ logarithmically (log_3 is used as it is the largest integer that provides 10 sets of data within the range of 50000). 
 
 These sets of data are then loaded one at the time by **AuomaticApp.java,** the version of the app that automates loading, inserting, and searching of data. The app will then write the result of each run into a csv file, allowing the python script to access the results obtained, and graph them using **matplotlib** 
 
@@ -76,8 +89,10 @@ make runExperiment
 ```
 in terminal to replicate the experiment.
 
-An UI version of the app is also included, for quick testing as well as enhanced user experience.
+An UI version of the app is also included, for quick testing as well as to provide an enhanced user experience.
+
+<div style="page-break-after: always;"></div>
 
 ### Git log
-
-
+![[Pasted image 20240322182750.png]]
+![[Pasted image 20240322182813.png]]
