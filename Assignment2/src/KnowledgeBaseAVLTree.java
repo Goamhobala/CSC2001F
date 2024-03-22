@@ -4,29 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 public class KnowledgeBaseAVLTree extends KnowledgeBaseTree{
     int insertionCount = 0;
-    // class EntryNodeAVL extends EntryNode{
-    //     String term;
-    //     String sentence;
-    //     double score;
-    //     EntryNodeAVL left = null;
-    //     EntryNodeAVL right = null;
-
-    //     EntryNodeAVL(String term, String sentence, double score){
-    //         super(term, sentence, score);
-
-    //     }
-    
-    //     EntryNodeAVL(String statement){
-    //         super(statement);
-    //     }
-
-    //     EntryNodeAVL(Entry other){
-    //         super(other);
-    //         int height = 0;
-    //     }
-    
-    // }
-    
     private EntryNode root; 
     
 
@@ -131,8 +108,13 @@ public class KnowledgeBaseAVLTree extends KnowledgeBaseTree{
         return 1 + Math.max(getHeight(node.left), getHeight(node.right));
     }
 
-    public int getOperationCount(){
-        return insertionCount + super.searchCount;
+    public int getInsertionCount(){
+        return insertionCount;
     }
+@Override
+    public int getSize(){
+        return super.getSize(this.root);
+    }
+
     
 }

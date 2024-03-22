@@ -1,6 +1,7 @@
 import subprocess
-import os
 import random
+import numpy as np
+import matplotlib.pyplot as plt
 class Experiment():
     SAMPLE = "../data/experiment.txt"
     def __init__(self, size):
@@ -20,15 +21,39 @@ class Experiment():
     def run(self):
         subprocess.run(["make", "run", f"SOURCE={Experiment.SAMPLE}", "QUERY=../data/GenericsKB-queries.txt"])
 
+# class Line():
+#     def __init__(self, data):
+        
+        
+
+def readData():
+    with open("../output/result.csv", "r") as f:
+        lines = f.readlines()
+    data = []
+    for line in lines:
+        data.append(line.split(","))
+    
+    return data
+
 def main():
     with open("../output/result.csv", "w"):
         pass
-    avg_100 = Experiment(100)
-    avg_100.run()
-    avg_1000 = Experiment(1000)
-    avg_1000.run()
-    avg_10000 = Experiment(10000)
-    avg_10000.run()
+    i = 1
+    experiments = []
+    x = []
+    while (i <= 50000):
+        experiment = Experiment(i)
+        experiment.run()
+        experiments.append(experiment)
+        i *= 3
+        x.append(i)
+    data = readData()
+    y = [datum[2] for datum in data]
+    plt.plot(x, y)
+    plt.show()
     
+    
+    
+
 if __name__ == "__main__":
     main()

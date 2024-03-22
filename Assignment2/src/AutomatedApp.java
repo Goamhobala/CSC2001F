@@ -12,7 +12,7 @@ public class AutomatedApp {
         actions.actionSearchTermFile(args[1]);
         // Output redirection takes too long to write for large dataset
         actions.actionSave("");
-        actions.actionSaveData("", tree.getSize(), "average", tree.getOperationCount());
+        actions.actionSaveData("", tree.getSize(), "average", tree.getInsertionCount(), tree.getSearchCount());
         
     }
 }

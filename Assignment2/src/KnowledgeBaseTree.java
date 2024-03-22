@@ -183,5 +183,9 @@ public class KnowledgeBaseTree extends KnowledgeBase{
         return 1 + getSize(node.left) + getSize(node.right);
     }
 
+    public int getSearchCount(){
+        return searchCount;
+    }
+
 } 
 
