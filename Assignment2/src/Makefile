@@ -10,7 +10,7 @@ PY = python
 .SUFFIXES: .java .class
 
 .java.class:
-	$(JAVAC) $(JFLAGS) $*.java
+	$(JAVAC) $(JFLAGS) -d ../bin/*.java
 
 CLASSES = UserInterface.java UIApp.java AutomatedApp.java KnowledgeBaseAppActions.java \
 	KnowledgeBase.java KnowledgeBaseTree.java KnowledgeBaseAVLTree.java \
@@ -25,10 +25,10 @@ SOURCE ?= "../data/GenericsKB.txt"
 QUERY ?= "../data/GenericsKB-queries.txt"
 
 run:
-	$(JAVA) AutomatedApp.java $(SOURCE) $(QUERY)
+	$(JAVA) -cp ../bin/ AutomatedApp.java $(SOURCE) $(QUERY)
 
 runUI:
-	$(JAVA) UIApp.java
+	$(JAVA) -cp ../bin/  UIApp.java
 
 runExperiment:
 	$(PY) experiment.py
